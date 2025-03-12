@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algebraic Fractions: Pattern Recognition</title>
+
+    <!-- Import MathJax for proper math rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+        // Configure MathJax for proper fraction rendering
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                packages: ['base', 'ams', 'noerrors', 'noundefined']
+            },
+            svg: {
+                fontCache: 'global'
+            },
+            options: {
+                enableMenu: false
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Import custom styles -->
+    <link rel="stylesheet" href="stylesV3.css">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Algebraic Fractions: Pattern Recognition</h1>
+            <div class="header-buttons">
+                <!-- Level Selector -->
+                <div class="level-selector">
+                    <label for="level-select">Difficulty:</label>
+                    <select id="level-select" class="level-select">
+                        <option value="basic">Basic Level</option>
+                        <option value="intermediate">Intermediate Level</option>
+                        <option value="advanced">Advanced Level</option>
+                        <option value="challenge">Challenge Level</option>
+                    </select>
+                </div>
+
+                <button id="formulas-btn" class="btn btn-light">
+                    <i class="fas fa-book"></i> Show Formulas
+                </button>
+                <button id="reset-btn" class="btn btn-light">
+                    <i class="fas fa-sync-alt"></i> Reset
+                </button>
+                <button id="next-problem-btn" class="btn btn-light">
+                    <i class="fas fa-forward"></i> Skip to Next
+                </button>
+            </div>
+        </header>
+
+        <!-- Progress Tracker -->
+        <div class="progress-tracker">
+            <div class="problem-counter">
+                <span id="current-problem">1</span> of <span id="total-problems">10</span>
+            </div>
+            <div class="progress-dots" id="progress-dots">
+                <!-- Dots will be added dynamically -->
+            </div>
+        </div>
+
+        <!-- Formulas Reference (Hidden by default) -->
+        <div id="formulas-panel" class="formulas-panel hidden">
+            <h3>Algebraic Formulas Cheat Sheet</h3>
+            <div class="formula-grid">
+                <div class="formula-card">
+                    <div class="formula-name">Difference of squares:</div>
+                    <div class="formula-math">\(a^2 - b^2 = (a + b)(a - b)\)</div>
+                </div>
+                <div class="formula-card">
+                    <div class="formula-name">Perfect square trinomial (plus):</div>
+                    <div class="formula-math">\(a^2 + 2ab + b^2 = (a + b)^2\)</div>
+                </div>
+                <div class="formula-card">
+                    <div class="formula-name">Perfect square trinomial (minus):</div>
+                    <div class="formula-math">\(a^2 - 2ab + b^2 = (a - b)^2\)</div>
+                </div>
+                <div class="formula-card">
+                    <div class="formula-name">Factor out common terms:</div>
+                    <div class="formula-math">\(ax + ay = a(x + y)\)</div>
+                </div>
+                <div class="formula-card">
+                    <div class="formula-name">Addition with same denominator:</div>
+                    <div class="formula-math">\(\frac{a}{c} + \frac{b}{c} = \frac{a + b}{c}\)</div>
+                </div>
+                <div class="formula-card">
+                    <div class="formula-name">Subtraction with same denominator:</div>
+                    <div class="formula-math">\(\frac{a}{c} - \frac{b}{c} = \frac{a - b}{c}\)</div>
+                </div>
+                <div class="formula-card">
+                    <div class="formula-name">Addition with different denominators:</div>
+                    <div class="formula-math">\(\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}\)</div>
+                </div>
+                <div class="formula-card">
+                    <div class="formula-name">Subtraction with different denominators:</div>
+                    <div class="formula-math">\(\frac{a}{b} - \frac{c}{d} = \frac{ad - bc}{bd}\)</div>
+                </div>
+                <div class="formula-card">
+                    <div class="formula-name">Multiplication of fractions:</div>
+                    <div class="formula-math">\(\frac{a}{b} \times \frac{c}{d} = \frac{ac}{bd}\)</div>
+                </div>
+                <div class="formula-card">
+                    <div class="formula-name">Division of fractions:</div>
+                    <div class="formula-math">\(\frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c} = \frac{ad}{bc}\)</div>
+                </div>
+                <div class="formula-card">
+                    <div class="formula-name">Negative in denominator:</div>
+                    <div class="formula-math">\(\frac{a}{-b} = -\frac{a}{b}\)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem Display -->
+        <div class="problem-container">
+            <h2>Problem:</h2>
+            <div id="problem" class="problem-display"></div>
+        </div>
+
+        <!-- Pattern Recognition Phase -->
+        <div id="pattern-phase" class="learning-phase">
+            <div class="phase-header">
+                <i class="fas fa-lightbulb"></i>
+                <h3>Pattern Recognition</h3>
+            </div>
+
+            <div class="pattern-slides">
+                <!-- "What You See" section -->
+                <div class="pattern-section" id="what-you-see-section">
+                    <h4>What You See:</h4>
+                    <div class="slides-container">
+                        <div class="slide-indicator">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="slide active" id="what-you-see-slide-1"></div>
+                        <div class="slide" id="what-you-see-slide-2"></div>
+                        <div class="slide" id="what-you-see-slide-3"></div>
+                    </div>
+                    <div class="slide-controls">
+                        <button class="prev-slide" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- "Key Insights" section -->
+                <div class="pattern-section hidden" id="key-insights-section">
+                    <h4>Key Insights:</h4>
+                    <div class="slides-container">
+                        <div class="slide-indicator">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="slide active" id="key-insights-slide-1"></div>
+                        <div class="slide" id="key-insights-slide-2"></div>
+                        <div class="slide" id="key-insights-slide-3"></div>
+                    </div>
+                    <div class="slide-controls">
+                        <button class="prev-slide" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- "Formulas To Apply" section -->
+                <div class="pattern-section hidden" id="formulas-apply-section">
+                    <h4>Formulas To Apply:</h4>
+                    <div class="slides-container">
+                        <div class="slide-indicator">
+                            <span class="current-slide">1</span>/<span class="total-slides">2</span>
+                        </div>
+                        <div class="slide active" id="formulas-apply-slide-1"></div>
+                        <div class="slide" id="formulas-apply-slide-2"></div>
+                        <div class="slide" id="formulas-apply-slide-3"></div>
+                    </div>
+                    <div class="slide-controls">
+                        <button class="prev-slide" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <button id="start-solution-btn" class="btn btn-primary">
+                Start Solution <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Solution Phase (Hidden initially) -->
+        <div id="solution-phase" class="learning-phase hidden">
+            <div class="phase-header">
+                <i class="fas fa-check-circle"></i>
+                <h3>Step-by-Step Solution</h3>
+            </div>
+
+            <div class="solution-container">
+                <div class="step-progress">
+                    <div class="step-counter">
+                        Step <span id="current-step">1</span> of <span id="total-steps">8</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="step-progress-fill"></div>
+                    </div>
+                </div>
+
+                <div class="step-content">
+                    <div class="step-explanation" id="step-explanation"></div>
+                    <div class="step-math" id="step-math"></div>
+                </div>
+            </div>
+
+            <button id="next-step-btn" class="btn btn-primary">
+                Next Step <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Level-specific JS files -->
+    <script src="problems-basic.js"></script>
+    <script src="problems-intermediate.js"></script>
+    <script src="problems-advanced.js"></script>
+    <script src="problems-challenge.js"></script>
+
+    <!-- Main script -->
+    <script src="main.js"></script>
+</body>
+</html>

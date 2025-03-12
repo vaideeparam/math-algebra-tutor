@@ -1,0 +1,469 @@
+/* Global Styles */
+:root {
+    --primary-color: #3b82f6;
+    --primary-dark: #2563eb;
+    --secondary-color: #6b7280;
+    --light-bg: #f3f4f6;
+    --border-color: #e5e7eb;
+    --success-color: #10b981;
+    --info-color: #3b82f6;
+    --insight-color: #8b5cf6;
+    --formula-color: #22c55e;
+    --text-dark: #1f2937;
+    --text-medium: #4b5563;
+    --text-light: #6b7280;
+    --basic-color: #22c55e; /* Green */
+    --intermediate-color: #f59e0b; /* Yellow */
+    --advanced-color: #ef4444; /* Red */
+    --challenge-color: #8b5cf6; /* Purple */
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: #f9fafb;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+header h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Level Selector Styles */
+.level-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 10px;
+}
+
+.level-selector label {
+    font-weight: 500;
+    color: var(--text-medium);
+    font-size: 0.9rem;
+}
+
+.level-select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.level-select:hover {
+    border-color: var(--primary-color);
+}
+
+.level-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Level-specific colors */
+.level-basic .problem-container {
+    border-left: 4px solid var(--basic-color);
+}
+
+.level-intermediate .problem-container {
+    border-left: 4px solid var(--intermediate-color);
+}
+
+.level-advanced .problem-container {
+    border-left: 4px solid var(--advanced-color);
+}
+
+.level-challenge .problem-container {
+    border-left: 4px solid var(--challenge-color);
+}
+
+/* Button Styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    outline: none;
+}
+
+.btn i {
+    margin-right: 6px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-light {
+    background-color: var(--light-bg);
+    color: var(--text-medium);
+    border: 1px solid var(--border-color);
+}
+
+.btn-light:hover {
+    background-color: #e5e7eb;
+}
+
+#next-problem-btn {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Progress Tracker */
+.progress-tracker {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.problem-counter {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+}
+
+.progress-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #d1d5db;
+}
+
+.dot.current {
+    background-color: var(--primary-color);
+}
+
+.dot.completed {
+    background-color: var(--success-color);
+}
+
+/* Formulas Panel */
+.formulas-panel {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: var(--light-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.formulas-panel h3 {
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+    color: var(--text-dark);
+}
+
+.formula-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 12px;
+}
+
+.formula-card {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.formula-name {
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--text-medium);
+}
+
+.formula-math {
+    color: var(--text-dark);
+}
+
+/* Problem Display */
+.problem-container {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: var(--light-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.problem-container h2 {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    color: var(--text-dark);
+}
+
+.problem-display {
+    font-size: 1.4rem;
+    text-align: center;
+    margin: 10px 0;
+}
+
+/* Learning Phase Common Styles */
+.learning-phase {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.phase-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.phase-header i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.phase-header h3 {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+}
+
+/* Pattern Recognition Slides */
+.pattern-slides {
+    margin-bottom: 20px;
+}
+
+.pattern-section {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 6px;
+    animation: fadeIn 0.5s ease;
+}
+
+#what-you-see-section {
+    border-left: 4px solid var(--info-color);
+    background-color: rgba(59, 130, 246, 0.05);
+}
+
+#key-insights-section {
+    border-left: 4px solid var(--insight-color);
+    background-color: rgba(139, 92, 246, 0.05);
+}
+
+#formulas-apply-section {
+    border-left: 4px solid var(--formula-color);
+    background-color: rgba(34, 197, 94, 0.05);
+}
+
+.pattern-section h4 {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+}
+
+.slides-container {
+    position: relative;
+    min-height: 80px;
+    margin-bottom: 10px;
+}
+
+.slide-indicator {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateY(10px);
+    font-size: 1.1rem;
+    min-height: 50px; /* Ensure minimum height for slides */
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.slide-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.slide-controls button {
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.slide-controls button:hover:not(:disabled) {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.slide-controls button:disabled {
+    color: var(--text-light);
+    cursor: not-allowed;
+}
+
+/* Solution Phase */
+.solution-container {
+    margin-bottom: 20px;
+}
+
+.step-progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.step-counter {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-medium);
+}
+
+.progress-bar {
+    width: 60%;
+    height: 8px;
+    background-color: var(--light-bg);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--success-color);
+    width: 0%;
+    transition: width 0.4s ease;
+}
+
+.step-content {
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.step-explanation {
+    margin-bottom: 10px;
+    color: var(--text-medium);
+}
+
+.step-math {
+    padding: 12px;
+    background-color: var(--light-bg);
+    border-radius: 6px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .header-buttons {
+        margin-top: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .formula-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .step-progress {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .progress-bar {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
